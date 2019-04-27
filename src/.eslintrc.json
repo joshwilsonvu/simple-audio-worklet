@@ -1,0 +1,8 @@
+{
+  "globals": {
+    "registerProcessor": "readonly",
+    "currentFrame": "readonly",
+    "currentTime": "readonly",
+    "sampleRate": "readonly"
+  }
+}
