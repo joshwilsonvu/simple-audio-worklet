@@ -11,11 +11,11 @@ function simpleAudioWorklet(
     cleanup?: () => unknown;
     args: FrameArgs;
 
-    constructor(options: any) {
+    constructor(options: AudioWorkletNodeOptions) {
       super(options);
       this.next = this.first; // will be switched after first
       this.isDone = false;
-      const outputChannelCount = options.outputChannelCount[0] || 2;
+      const outputChannelCount = options.outputChannelCount ? options.outputChannelCount[0] : 2;
       // Because process() is such a hot loop (3ms at 44.1kHz), allocate objects only once to avoid frequent GC.
       this.args = {
         parameters: {},
