@@ -1,6 +1,6 @@
 {
   "name": "simple-audio-worklet",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Write an audio worklet with frame-based processing and a variety of input formats.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
