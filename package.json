@@ -4,12 +4,13 @@
   "description": "Write an audio worklet with frame-based processing and a variety of input formats.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": ["/lib"],
   "scripts": {
     "build": "rm -rf lib; tsc; npm run minify",
     "build:dev": "rm -rf lib; tsc --watch",
     "lint": "eslint --ext ts src",
     "minify": "uglifyjs --compress --mangle --output lib/index.min.js -- lib/index.js",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "author": "Josh Wilson",
   "license": "ISC",
