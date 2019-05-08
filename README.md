@@ -1,6 +1,24 @@
 # Simple Audio Worklet
 
-AudioWorklets handle audio in blocks of 128 frames at a time,
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Size](https://img.badgesize.io/joshwilsonvu/simple-audio-worklet/master/lib/index.min.js?compression=gzip)
+[![Issues](https://img.shields.io/github/issues/joshwilsonvu/simple-audio-worklet.svg)](https://github.com/joshwilsonvu/simple-audio-worklet/issues)
+[![npm version](https://badge.fury.io/js/simple-audio-worklet.svg)](https://badge.fury.io/js/simple-audio-worklet)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+Table of Contents
+=================
+
+* [Usage](#usage)
+  * [Generator function](#generator-function)
+  * [Class](#class)
+  * [Pure function](#pure-function)
+* [Installation](#installation)
+  * [ES6 Module](#es6-module)
+  * [Webpack](#webpack)
+
+
+Audio Worklets handle audio in blocks of 128 frames at a time,
 provide parameters that can be arrays of either one or 128 values,
 and make setup that depends on parameters difficult.
 
@@ -105,23 +123,26 @@ let processor = fromGenerator(addNoise, {
 });
 ```
 
-**Note:** Because of the nature of generators, there is a one-frame delay on
+#### Notes
+1. Because of the nature of generators, there is a one-frame delay on
 the output, which may not be suitable for some cases. The very first
 frame is zero-filled.
 
-**Note:** The identity of args, args.parameters, args.input, and args.port is guaranteed
-not to change. Therefore, it is okay to use
-```javascript
+2. The identity of `args`, `args.parameters`, `args.input`, `args.port`,
+and `args.env` is guaranteed not to change. Therefore, it is okay to use
+ ```javascript
 yield x;
-```
-whereas otherwise one would have to use
-```javascript
-({parameters, input} = yield x);
-```
+ ```
 
-*However*, the values for the individual parameters must be accessed on the parameters
-object or updated every yield, or else the values will become outdated. For example,
-```javascript
+ whereas otherwise one would have to use
+
+ ```javascript
+({parameters, input} = yield x);
+ ```
+
+ *However*, the values for the individual parameters must be accessed on the parameters
+ object or updated every yield, or else the values will become outdated. For example,
+ ```javascript
 function* process({parameters, input, port}) {
   let {param} = parameters; // BAD, will go stale
   for (;;) {
@@ -131,8 +152,12 @@ function* process({parameters, input, port}) {
     yield result;
   }
 }
-```
+ ```
 
+3.  Some browsers do not garbage collect abandoned generator functions
+in their paused state. Thus, posting the string `"stop"` to the
+`AudioWorkletProcessor` from the corresponding `AudioWorkletNode` will force
+the generator function to return, useful if using many instances.
 
 ### Class
 
@@ -214,7 +239,9 @@ Capturing a constant value is fine.
 $ npm install simple-audio-worklet
 ```
 
-### Browser Module
+Typescript type definitions are bundled with this package.
+
+### ES6 Module
 In Chromium and potentially other browsers, worklets can
 [now use](https://chromium-review.googlesource.com/c/chromium/src/+/627543)
 standard ES6 module loading. This means this package can be included into
@@ -243,5 +270,6 @@ import { fromGenerator, fromClass, fromPure } from 'simple-audio-worklet';
 
 ### Webpack
 Packing files in worklet global scopes with packages like
-[worklet-loader](https://github.com/reklawnos/worklet-loader) can work
+[worklet-loader](https://github.com/reklawnos/worklet-loader) may work
 but is still relatively immature at time of writing.
+
