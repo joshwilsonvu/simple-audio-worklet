@@ -37,7 +37,8 @@ Whether a generator function, class, or pure function, use this package
 like this:
 
 ```javascript
-let processor = fromX(yourImplementation, options);
+import { fromGenerator, fromClass, fromPure } from 'simple-audio-worklet';
+let processor = fromOneOfTheAbove(yourImplementation, options);
 ```
 
 where options looks like the following:
