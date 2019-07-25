@@ -4,7 +4,7 @@
 ![Size](https://img.badgesize.io/joshwilsonvu/simple-audio-worklet/master/lib/index.min.js?compression=gzip)
 [![Issues](https://img.shields.io/github/issues/joshwilsonvu/simple-audio-worklet.svg)](https://github.com/joshwilsonvu/simple-audio-worklet/issues)
 [![npm version](https://badge.fury.io/js/simple-audio-worklet.svg)](https://badge.fury.io/js/simple-audio-worklet)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
 
 Table of Contents
 =================
